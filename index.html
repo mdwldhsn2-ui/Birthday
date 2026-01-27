@@ -3,18 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Birthday Keya ❤️ | একটি বিশেষ উপহার</title>
-    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@500;700&family=Lato:wght@300;400&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    <title>Happy Birthday Keya ❤️ | একটি রোমান্টিক উপহার</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Playfair+Display:wght@500;700&family=Poppins:wght@300;400;500&family=Great+Vibes&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary-color: #e91e63;
-            --secondary-color: #ff4081;
-            --glass-bg: rgba(255, 255, 255, 0.3);
-            --glass-border: rgba(255, 255, 255, 0.6);
-            --text-dark: #2d3436;
+            --pink-light: #ffd6e7;
+            --pink-medium: #ff85a2;
+            --pink-dark: #ff4081;
+            --pink-deep: #e91e63;
+            --purple-light: #d9c5f4;
+            --purple-medium: #b39ddb;
             --gold: #ffd700;
-            --pink-light: #ffe4ec;
+            --gold-light: #fff9c4;
+            --blue-light: #bbdefb;
+            --glass-bg: rgba(255, 255, 255, 0.25);
+            --glass-border: rgba(255, 255, 255, 0.4);
         }
 
         body, html {
@@ -23,15 +27,15 @@
             height: 100%;
             width: 100%;
             overflow-x: hidden;
-            font-family: 'Lato', sans-serif;
-            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 50%, #a1c4fd 100%);
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #ffd6e7 0%, #f8bbd9 25%, #e1bee7 50%, #bbdefb 75%, #b2ebf2 100%);
             background-attachment: fixed;
-            color: var(--text-dark);
+            color: #5d4037;
             scroll-behavior: smooth;
         }
 
-        /* --- Enhanced Floating Hearts --- */
-        .hearts-container {
+        /* --- Enhanced Floating Elements --- */
+        .floating-elements {
             position: fixed;
             top: 0;
             left: 0;
@@ -42,7 +46,7 @@
             overflow: hidden;
         }
 
-        .heart {
+        .floating-heart {
             position: absolute;
             bottom: -10vh;
             display: inline-block;
@@ -52,9 +56,10 @@
             transform: rotate(-45deg);
             animation: floatUp 15s linear infinite;
             opacity: 0.8;
+            filter: drop-shadow(0 0 5px rgba(255, 64, 129, 0.5));
         }
 
-        .heart:before, .heart:after {
+        .floating-heart:before, .floating-heart:after {
             content: "";
             position: absolute;
             background-color: inherit;
@@ -63,34 +68,28 @@
             border-radius: 50%;
         }
 
-        .heart:before { top: -10px; left: 0; }
-        .heart:after { left: 10px; top: 0; }
+        .floating-heart:before { top: -10px; left: 0; }
+        .floating-heart:after { left: 10px; top: 0; }
 
-        .heart:nth-child(odd) {
-            background-color: rgba(233, 30, 99, 0.8);
-        }
-        
-        .heart:nth-child(even) {
-            background-color: rgba(255, 64, 129, 0.8);
-        }
-        
-        .heart:nth-child(3n) {
-            background-color: rgba(255, 215, 0, 0.8);
+        .floating-star {
+            position: absolute;
+            color: var(--gold);
+            font-size: 1.2rem;
+            animation: floatStar 20s linear infinite;
+            opacity: 0.7;
+            filter: drop-shadow(0 0 8px gold);
         }
 
         @keyframes floatUp {
-            0% { 
-                transform: rotate(-45deg) translate(0, 0) scale(0.5); 
-                opacity: 0; 
-            }
-            20% { 
-                opacity: 0.9; 
-                transform: rotate(-45deg) translate(0, -10px) scale(1);
-            }
-            100% { 
-                transform: rotate(-45deg) translate(var(--move-x, -100px), -120vh) scale(0.5); 
-                opacity: 0; 
-            }
+            0% { transform: rotate(-45deg) translate(0, 0) scale(0.5); opacity: 0; }
+            20% { opacity: 0.9; transform: rotate(-45deg) translate(0, -10px) scale(1); }
+            100% { transform: rotate(-45deg) translate(var(--move-x, -100px), -120vh) scale(0.5); opacity: 0; }
+        }
+
+        @keyframes floatStar {
+            0% { transform: translate(0, 0) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.8; }
+            100% { transform: translate(var(--move-x, 100px), -120vh) rotate(360deg); opacity: 0; }
         }
 
         /* --- Sparkle Effect --- */
@@ -101,11 +100,85 @@
             pointer-events: none;
             z-index: 1;
             animation: sparkle 1.5s infinite;
+            box-shadow: 0 0 10px white;
         }
 
         @keyframes sparkle {
             0%, 100% { opacity: 0; transform: scale(0); }
             50% { opacity: 1; transform: scale(1); }
+        }
+
+        /* --- Countdown Timer --- */
+        .countdown-container {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 1000;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+        }
+
+        .countdown-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 3.5rem;
+            margin-bottom: 30px;
+            color: var(--gold);
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.7);
+            text-align: center;
+        }
+
+        .clock-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .clock-unit {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 20px 15px;
+            min-width: 100px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .clock-number {
+            font-size: 3.5rem;
+            font-weight: bold;
+            color: white;
+            font-family: 'Poppins', sans-serif;
+            text-shadow: 0 0 15px var(--gold);
+        }
+
+        .clock-label {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-top: 5px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .countdown-message {
+            font-size: 1.3rem;
+            margin-top: 30px;
+            color: var(--pink-light);
+            text-align: center;
+            max-width: 600px;
+            padding: 0 20px;
+            font-family: 'Playfair Display', serif;
         }
 
         /* --- UI Layout --- */
@@ -122,16 +195,17 @@
 
         /* Enhanced Glass Card */
         .glass-card {
-            background: var(--glass-bg);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0.1));
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             border: 1px solid var(--glass-border);
             border-radius: 25px;
-            padding: 50px 40px;
+            padding: 40px 30px;
             text-align: center;
             box-shadow: 0 15px 35px rgba(31, 38, 135, 0.2), 
-                        inset 0 1px 0 rgba(255, 255, 255, 0.6);
-            max-width: 550px;
+                        inset 0 1px 0 rgba(255, 255, 255, 0.6),
+                        0 0 30px rgba(255, 64, 129, 0.2);
+            max-width: 500px;
             width: 90%;
             transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             position: relative;
@@ -152,22 +226,21 @@
                 transparent
             );
             transform: rotate(45deg);
-            transition: all 0.5s;
+            transition: all 0.8s;
         }
 
         .glass-card:hover:before {
-            transform: rotate(45deg) translate(50px, 50px);
+            transform: rotate(45deg) translate(30px, 30px);
         }
 
         h1.title {
             font-family: 'Dancing Script', cursive;
-            font-size: 4.5rem;
-            color: var(--primary-color);
+            font-size: 3.2rem;
+            color: var(--pink-deep);
             margin: 0;
-            text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.2),
-                         0 0 20px rgba(255, 64, 129, 0.3);
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.15);
             line-height: 1.1;
-            background: linear-gradient(45deg, #e91e63, #ff4081);
+            background: linear-gradient(45deg, #e91e63, #ff4081, #ff85a2);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -181,13 +254,13 @@
 
         p.subtitle {
             font-family: 'Playfair Display', serif;
-            font-size: 1.4rem;
+            font-size: 1.3rem;
             margin-top: 15px;
-            color: #555;
+            color: #7b1fa2;
             font-weight: 500;
             position: relative;
             display: inline-block;
-            padding-bottom: 5px;
+            padding-bottom: 8px;
         }
 
         p.subtitle:after {
@@ -195,25 +268,25 @@
             position: absolute;
             width: 50%;
             height: 3px;
-            background: linear-gradient(90deg, transparent, var(--primary-color), transparent);
+            background: linear-gradient(90deg, transparent, var(--pink-deep), transparent);
             bottom: 0;
             left: 25%;
         }
 
         .btn-start {
-            margin-top: 40px;
-            padding: 15px 45px;
-            font-size: 1.2rem;
+            margin-top: 35px;
+            padding: 14px 40px;
+            font-size: 1.1rem;
             border: none;
-            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            background: linear-gradient(45deg, var(--pink-deep), var(--pink-dark));
             color: white;
             border-radius: 50px;
             cursor: pointer;
             box-shadow: 0 8px 25px rgba(233, 30, 99, 0.4);
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            font-weight: bold;
+            font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 1.5px;
             position: relative;
             overflow: hidden;
             z-index: 1;
@@ -244,7 +317,7 @@
         #main-content {
             display: none;
             width: 100%;
-            max-width: 700px;
+            max-width: 650px;
             padding-bottom: 50px;
             animation: fadeIn 1s ease;
         }
@@ -254,18 +327,20 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Photo Slideshow with Polaroid Enhancement */
+        /* Photo Slideshow with Enhanced Polaroid */
         .polaroid-frame {
             background: white;
-            padding: 20px 20px 60px 20px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2), 
-                        0 5px 15px rgba(0, 0, 0, 0.1);
-            transform: rotate(-1deg);
-            margin: 40px auto;
+            padding: 18px 18px 65px 18px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15), 
+                        0 5px 15px rgba(0, 0, 0, 0.1),
+                        inset 0 0 30px rgba(255, 192, 203, 0.3);
+            transform: rotate(-2deg);
+            margin: 35px auto;
             max-width: 100%;
             border-radius: 8px;
             position: relative;
             transition: transform 0.5s;
+            border: 1px solid rgba(255, 192, 203, 0.5);
         }
 
         .polaroid-frame:hover {
@@ -275,10 +350,10 @@
         .polaroid-frame:before {
             content: '';
             position: absolute;
-            top: -10px;
-            left: -10px;
-            right: -10px;
-            bottom: -10px;
+            top: -12px;
+            left: -12px;
+            right: -12px;
+            bottom: -12px;
             border: 2px dashed rgba(233, 30, 99, 0.3);
             border-radius: 12px;
             pointer-events: none;
@@ -288,7 +363,7 @@
         .slideshow {
             position: relative;
             width: 100%;
-            height: 400px;
+            height: 380px;
             overflow: hidden;
             border-radius: 4px;
             box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
@@ -310,14 +385,14 @@
 
         .caption {
             position: absolute;
-            bottom: 15px;
+            bottom: 20px;
             width: 100%;
             text-align: center;
             font-family: 'Great Vibes', cursive;
-            font-size: 2.2rem;
-            color: #444;
+            font-size: 2rem;
+            color: #7b1fa2;
             text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
-            animation: captionFloat 3s infinite ease-in-out;
+            animation: captionFloat 4s infinite ease-in-out;
         }
 
         @keyframes captionFloat {
@@ -328,12 +403,13 @@
         /* Enhanced Letter Section */
         .letter-card {
             background: rgba(255, 255, 255, 0.95);
-            padding: 40px;
+            padding: 35px;
             border-radius: 20px;
-            margin-top: 50px;
+            margin-top: 45px;
             position: relative;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-            border-left: 5px solid var(--primary-color);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08),
+                        0 0 20px rgba(233, 30, 99, 0.1);
+            border-left: 6px solid var(--pink-deep);
             overflow: hidden;
         }
 
@@ -344,14 +420,14 @@
             left: 0;
             width: 100%;
             height: 5px;
-            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color), var(--gold));
+            background: linear-gradient(90deg, var(--pink-deep), var(--pink-medium), var(--gold));
         }
 
         .letter-card h2 {
             font-family: 'Playfair Display', serif;
-            color: var(--primary-color);
+            color: var(--pink-deep);
             margin-top: 0;
-            font-size: 2.5rem;
+            font-size: 2.2rem;
             position: relative;
             display: inline-block;
             padding-bottom: 10px;
@@ -362,15 +438,15 @@
             position: absolute;
             width: 50%;
             height: 3px;
-            background: linear-gradient(90deg, var(--primary-color), transparent);
+            background: linear-gradient(90deg, var(--pink-deep), transparent);
             bottom: 0;
             left: 0;
         }
 
         .letter-text {
-            font-size: 1.2rem;
-            line-height: 1.9;
-            color: #555;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #5d4037;
             text-align: left;
             position: relative;
             padding-left: 20px;
@@ -379,7 +455,7 @@
 
         .letter-text:before {
             content: '"';
-            font-size: 5rem;
+            font-size: 4rem;
             font-family: 'Times New Roman', serif;
             color: rgba(233, 30, 99, 0.1);
             position: absolute;
@@ -390,37 +466,37 @@
         .signature {
             text-align: right;
             font-family: 'Great Vibes', cursive;
-            font-size: 2.5rem;
-            color: var(--primary-color);
-            margin-top: 30px;
-            padding-top: 20px;
-            border-top: 1px dashed #ddd;
+            font-size: 2.2rem;
+            color: var(--pink-deep);
+            margin-top: 25px;
+            padding-top: 15px;
+            border-top: 1px dashed #e1bee7;
         }
 
-        /* Music Button Enhancement */
+        /* Enhanced Music Button (Smaller) */
         .music-control {
             position: fixed;
-            bottom: 30px;
-            right: 30px;
-            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
-            width: 60px;
-            height: 60px;
+            bottom: 25px;
+            right: 25px;
+            background: linear-gradient(45deg, var(--pink-deep), var(--pink-dark));
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 8px 20px rgba(233, 30, 99, 0.4);
+            box-shadow: 0 6px 15px rgba(233, 30, 99, 0.4);
             cursor: pointer;
             z-index: 100;
-            font-size: 1.8rem;
+            font-size: 1.4rem;
             color: white;
-            animation: spin 8s linear infinite, pulse 2s infinite alternate;
+            animation: spin 10s linear infinite, pulse 2s infinite alternate;
             transition: all 0.3s;
         }
         
         .music-control:hover {
             transform: scale(1.1);
-            box-shadow: 0 10px 25px rgba(233, 30, 99, 0.6);
+            box-shadow: 0 8px 20px rgba(233, 30, 99, 0.6);
         }
 
         .music-control.paused {
@@ -429,8 +505,8 @@
         }
 
         @keyframes pulse {
-            0% { box-shadow: 0 8px 20px rgba(233, 30, 99, 0.4); }
-            100% { box-shadow: 0 8px 25px rgba(233, 30, 99, 0.8), 0 0 15px rgba(233, 30, 99, 0.5); }
+            0% { box-shadow: 0 6px 15px rgba(233, 30, 99, 0.4); }
+            100% { box-shadow: 0 6px 20px rgba(233, 30, 99, 0.7), 0 0 12px rgba(233, 30, 99, 0.5); }
         }
 
         /* Confetti Canvas */
@@ -439,66 +515,84 @@
             top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 99;
         }
 
-        /* Birthday Cake Animation */
+        /* Enhanced Birthday Cake with Beautiful Candles */
         .birthday-cake {
             position: relative;
-            width: 150px;
-            height: 100px;
-            margin: 30px auto;
+            width: 180px;
+            height: 120px;
+            margin: 25px auto;
         }
 
         .cake {
             position: absolute;
-            width: 150px;
-            height: 60px;
-            background: #ffccbc;
+            width: 180px;
+            height: 70px;
+            background: linear-gradient(to bottom, #ffccbc, #ffab91);
             border-radius: 10px 10px 0 0;
             bottom: 0;
             left: 0;
-            box-shadow: inset 0 -10px 0 #ffab91;
+            box-shadow: inset 0 -12px 0 #ff8a65;
         }
 
         .icing {
             position: absolute;
-            width: 160px;
-            height: 30px;
-            background: #ffcdd2;
+            width: 190px;
+            height: 35px;
+            background: linear-gradient(to bottom, #ffcdd2, #f8bbd9);
             border-radius: 50% 50% 0 0;
-            top: -15px;
+            top: -17px;
             left: -5px;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
         }
 
         .candle {
             position: absolute;
-            width: 10px;
-            height: 40px;
-            background: #4fc3f7;
-            top: -55px;
-            left: 70px;
-            border-radius: 5px;
+            width: 8px;
+            height: 45px;
+            background: linear-gradient(to bottom, #4fc3f7, #29b6f6);
+            top: -62px;
+            border-radius: 4px;
+            box-shadow: 0 0 5px rgba(79, 195, 247, 0.7);
         }
+
+        .candle:nth-child(1) { left: 40px; }
+        .candle:nth-child(2) { left: 70px; }
+        .candle:nth-child(3) { left: 100px; }
+        .candle:nth-child(4) { left: 130px; }
 
         .flame {
             position: absolute;
-            width: 15px;
-            height: 25px;
-            background: #ffeb3b;
+            width: 16px;
+            height: 30px;
+            background: linear-gradient(to bottom, #ffeb3b, #ff9800);
             border-radius: 50% 50% 20% 20%;
-            top: -80px;
-            left: 67.5px;
-            animation: flicker 0.5s infinite alternate;
-            box-shadow: 0 0 20px #ff9800;
+            box-shadow: 0 0 20px #ff9800, 0 0 40px #ff5722;
+            animation: flicker 0.8s infinite alternate;
+            filter: blur(0.5px);
         }
 
+        .flame:nth-child(5) { left: 36px; top: -92px; }
+        .flame:nth-child(6) { left: 66px; top: -92px; animation-delay: 0.2s; }
+        .flame:nth-child(7) { left: 96px; top: -92px; animation-delay: 0.4s; }
+        .flame:nth-child(8) { left: 126px; top: -92px; animation-delay: 0.6s; }
+
         @keyframes flicker {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
+            0%, 100% { 
+                transform: scale(1) rotate(-2deg); 
+                height: 30px;
+                box-shadow: 0 0 20px #ff9800, 0 0 40px #ff5722;
+            }
+            50% { 
+                transform: scale(1.1) rotate(2deg); 
+                height: 35px;
+                box-shadow: 0 0 25px #ffeb3b, 0 0 50px #ff9800;
+            }
         }
 
         /* Progress Bar */
         .progress-container {
             width: 100%;
-            height: 5px;
+            height: 4px;
             background: rgba(255, 255, 255, 0.2);
             position: fixed;
             top: 0;
@@ -508,37 +602,84 @@
 
         .progress-bar {
             height: 100%;
-            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            background: linear-gradient(90deg, var(--pink-deep), var(--pink-medium), var(--gold));
             width: 0%;
             transition: width 0.3s;
         }
 
+        /* Promise Cards */
+        .promise-card {
+            background: rgba(255, 255, 255, 0.7);
+            padding: 15px;
+            border-radius: 15px;
+            min-width: 140px;
+            text-align: center;
+            transition: all 0.3s;
+            border: 1px solid rgba(255, 182, 193, 0.3);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .promise-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            background: rgba(255, 255, 255, 0.9);
+        }
+
         /* Responsive Design */
         @media (max-width: 768px) {
-            h1.title { font-size: 3.5rem; }
+            h1.title { font-size: 2.8rem; }
             .glass-card { padding: 30px 20px; }
             .slideshow { height: 300px; }
-            .caption { font-size: 1.8rem; }
+            .caption { font-size: 1.7rem; }
             .letter-card { padding: 25px; }
-            .letter-card h2 { font-size: 2rem; }
-            .music-control { bottom: 20px; right: 20px; }
+            .letter-card h2 { font-size: 1.9rem; }
+            .clock-unit { min-width: 80px; padding: 15px 10px; }
+            .clock-number { font-size: 2.8rem; }
+            .countdown-title { font-size: 2.8rem; }
         }
 
-        /* Scroll Indicator */
-        .scroll-indicator {
-            position: absolute;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            color: var(--primary-color);
+        /* Final Celebration Animation */
+        .final-celebration {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #ff4081, #e91e63, #7b1fa2);
+            z-index: 2000;
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            animation: celebrationBg 3s infinite alternate;
+        }
+
+        @keyframes celebrationBg {
+            0% { background: linear-gradient(135deg, #ff4081, #e91e63, #7b1fa2); }
+            100% { background: linear-gradient(135deg, #7b1fa2, #e91e63, #ff4081); }
+        }
+
+        .celebration-text {
+            font-family: 'Dancing Script', cursive;
+            font-size: 4.5rem;
+            text-align: center;
+            margin-bottom: 30px;
+            text-shadow: 0 0 20px white;
+            animation: celebrationText 2s infinite alternate;
+        }
+
+        @keyframes celebrationText {
+            0% { transform: scale(1); text-shadow: 0 0 20px white; }
+            100% { transform: scale(1.1); text-shadow: 0 0 30px gold, 0 0 40px white; }
+        }
+
+        .celebration-subtext {
             font-size: 1.5rem;
-            animation: bounce 2s infinite;
-        }
-
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
-            40% { transform: translateX(-50%) translateY(-10px); }
-            60% { transform: translateX(-50%) translateY(-5px); }
+            text-align: center;
+            max-width: 600px;
+            padding: 0 20px;
+            font-family: 'Playfair Display', serif;
         }
     </style>
 </head>
@@ -549,68 +690,103 @@
         আপনার ব্রাউজার অডিও সমর্থন করে না।
     </audio>
 
+    <!-- Countdown Timer -->
+    <div class="countdown-container" id="countdown-container">
+        <h1 class="countdown-title">প্রিয় কেয়া</h1>
+        <div class="clock-container">
+            <div class="clock-unit">
+                <div class="clock-number" id="countdown-hours">00</div>
+                <div class="clock-label">ঘন্টা</div>
+            </div>
+            <div class="clock-unit">
+                <div class="clock-number" id="countdown-minutes">00</div>
+                <div class="clock-label">মিনিট</div>
+            </div>
+            <div class="clock-unit">
+                <div class="clock-number" id="countdown-seconds">00</div>
+                <div class="clock-label">সেকেন্ড</div>
+            </div>
+        </div>
+        <p class="countdown-message">তোমার বিশেষ দিনের জন্য অপেক্ষা করছি... যখন ঘড়ির কাঁটা ঠিক ১২টায় মিলিত হবে, তখনই খুলে যাবে তোমার বিশেষ উপহার!</p>
+    </div>
+
+    <!-- Final Celebration -->
+    <div class="final-celebration" id="final-celebration">
+        <div class="celebration-text">শুভ জন্মদিন প্রিয় কেয়া! 🎉</div>
+        <div class="celebration-subtext">জীবনের প্রতিটি মুহূর্ত যেন তোমার জন্য হয়ে উঠে সুন্দর ও রোমান্টিক। আজকের এই বিশেষ দিনে তোমাকে অগণিত শুভেচ্ছা ও ভালোবাসা। ❤️</div>
+    </div>
+
     <div class="progress-container">
         <div class="progress-bar" id="progress-bar"></div>
     </div>
 
+    <!-- Music Button (Smaller) -->
     <div id="music-btn" class="music-control paused" style="display: none;" onclick="toggleMusic()">
         <i class="fas fa-music"></i>
     </div>
 
-    <div class="hearts-container" id="hearts-container"></div>
+    <!-- Floating Elements -->
+    <div class="floating-elements" id="floating-elements"></div>
     
+    <!-- Confetti Canvas -->
     <canvas id="confetti-canvas"></canvas>
 
+    <!-- Main Container -->
     <div class="container">
         
+        <!-- Welcome Screen -->
         <div class="glass-card" id="welcome-screen">
             <div class="birthday-cake">
                 <div class="cake"></div>
                 <div class="icing"></div>
                 <div class="candle"></div>
+                <div class="candle"></div>
+                <div class="candle"></div>
+                <div class="candle"></div>
+                <div class="flame"></div>
+                <div class="flame"></div>
+                <div class="flame"></div>
                 <div class="flame"></div>
             </div>
             
-            <h1 class="title">শুভ জন্মদিন প্রিয় কেয়া</h1>
-            <p class="subtitle">জীবনের প্রতিটি পর্বে যেন তোমার হাসি ফুটে থাকে</p>
+            <h1 class="title">শুভ জন্মদিন প্রিয় কেয়া</h1>
+            <p class="subtitle">আজকের দিনটি শুধু তোমার জন্যই উৎসর্গিত</p>
             
-            <div style="margin-top: 30px; font-size: 1.1rem; color: #666; line-height: 1.6;">
+            <div style="margin-top: 25px; font-size: 1rem; color: #7b1fa2; line-height: 1.6;">
                 <i class="fas fa-heart" style="color: #e91e63; margin: 0 5px;"></i>
-                আজকের দিনটি তোমার জন্য উৎসর্গিত
+                প্রতিটি মুহূর্ত হোক সুখময়
                 <i class="fas fa-heart" style="color: #e91e63; margin: 0 5px;"></i>
             </div>
             
-            <button class="btn-start" onclick="startCelebration()">
+            <button class="btn-start" onclick="startCountdown()" id="gift-btn">
                 <i class="fas fa-gift" style="margin-right: 10px;"></i>
                 তোমার উপহার খুলে দেখো
             </button>
-            
-            <div class="scroll-indicator" id="scroll-indicator">
-                <i class="fas fa-chevron-down"></i>
-            </div>
         </div>
 
+        <!-- Main Content (Hidden Initially) -->
         <div id="main-content">
-            <div class="glass-card" style="margin-bottom: 30px;">
-                <h1 class="title">জন্মদিনের শুভেচ্ছা! 🎉</h1>
-                <p class="subtitle">তুমি আমার জীবনের সবচেয়ে সুন্দর উপহার</p>
+            <div class="glass-card" style="margin-bottom: 25px;">
+                <h1 class="title">জন্মদিনের অফুরান শুভেচ্ছা! 🌸</h1>
+                <p class="subtitle">তুমি আমার জীবনের সবচেয়ে সুন্দর অনুভূতি</p>
                 
-                <div style="display: flex; justify-content: center; margin-top: 20px;">
-                    <div style="margin: 0 15px; text-align: center;">
-                        <div style="font-size: 2.5rem; color: #e91e63;">∞</div>
-                        <div style="font-size: 0.9rem; color: #666;">অনন্ত ভালোবাসা</div>
+                <div style="display: flex; justify-content: center; margin-top: 20px; flex-wrap: wrap; gap: 15px;">
+                    <div class="promise-card">
+                        <i class="fas fa-heart" style="font-size: 2rem; color: #e91e63;"></i>
+                        <p style="margin: 8px 0 0; font-size: 0.9rem;">অফুরান ভালোবাসা</p>
                     </div>
-                    <div style="margin: 0 15px; text-align: center;">
-                        <div style="font-size: 2.5rem; color: #ff4081;">❤️</div>
-                        <div style="font-size: 0.9rem; color: #666;">অকৃত্রিম ভালোবাসা</div>
+                    <div class="promise-card">
+                        <i class="fas fa-star" style="font-size: 2rem; color: gold;"></i>
+                        <p style="margin: 8px 0 0; font-size: 0.9rem;">উজ্জ্বল ভবিষ্যৎ</p>
                     </div>
-                    <div style="margin: 0 15px; text-align: center;">
-                        <div style="font-size: 2.5rem; color: #ffd700;">✨</div>
-                        <div style="font-size: 0.9rem; color: #666;">উজ্জ্বল ভবিষ্যৎ</div>
+                    <div class="promise-card">
+                        <i class="fas fa-laugh-beam" style="font-size: 2rem; color: #ff9800;"></i>
+                        <p style="margin: 8px 0 0; font-size: 0.9rem;">অনন্ত হাসি</p>
                     </div>
                 </div>
             </div>
 
+            <!-- Photo Slideshow -->
             <div class="polaroid-frame">
                 <div class="slideshow">
                     <img src="image_3.png" class="slide active" alt="Memory">
@@ -623,38 +799,17 @@
                 <div class="caption" id="photo-caption">ভালোবাসার মুহূর্তসমূহ ❤️</div>
             </div>
 
+            <!-- Letter Section -->
             <div class="letter-card">
-                <h2>তোমার জন্য আমার হৃদয়ের কথাগুলো...</h2>
+                <h2>তোমার জন্য আমার হৃদয়ের কথাগুলো...</h2>
                 <div class="letter-text">
-                    প্রিয়তমা কেয়া,<br><br>
-                    আজ তোমার জন্মদিন। এই বিশেষ দিনে আমার হৃদয় থেকে কিছু কথা জানাই। তুমি আমার জীবনে এসে সবকিছুকে অর্থপূর্ণ করে তুলেছ। তোমার প্রতিটি হাসি, প্রতিটি কথা আমার কাছে অমূল্য সম্পদ।<br><br>
+                    প্রিয়তমা কেয়া,<br><br>
+                    আজ তোমার জন্মদিন। এই বিশেষ দিনে আমার হৃদয় থেকে কিছু কথা জানাই। তুমি আমার জীবনে এসে সবকিছুকে অর্থপূর্ণ করে তুলেছ। তোমার প্রতিটি হাসি, প্রতিটি কথা আমার কাছে অমূল্য সম্পদ।<br><br>
                     মনে আছে, আমাদের প্রথম দেখা? সেদিন থেকেই জেনেছিলাম, তুমি সাধারণ কেউ নও। তুমি আমার জীবনের শ্রেষ্ঠ উপহার। প্রতিটি দিন যেন তোমার সাথে কাটাতে পারি, এই আমার একমাত্র কামনা।<br><br>
-                    তোমার স্বপ্নগুলো সত্যি হোক, জীবনের প্রতিটি পদক্ষেপে সাফল্য যেন তোমার সঙ্গী হয়। আমি সবসময় তোমার পাশে আছি এবং থাকবো।<br><br>
-                    আজকের দিনটি যেন তোমার জন্য হয়ে উঠে অবিস্মরণীয়। জন্মদিনের অনেক অনেক শুভেচ্ছা, আমার প্রিয়তমা।
+                    তোমার স্বপ্নগুলো সত্যি হোক, জীবনের প্রতিটি পদক্ষেপে সাফল্য যেন তোমার সঙ্গী হয়। আমি সবসময় তোমার পাশে আছি এবং থাকবো।<br><br>
+                    আজকের দিনটি যেন তোমার জন্য হয়ে উঠে অবিস্মরণীয়। জন্মদিনের অনেক অনেক শুভেচ্ছা, আমার প্রিয়তমা।
                 </div>
-                <div class="signature">- চিরকাল তোমার, ওয়ালিদ</div>
-            </div>
-            
-            <div class="glass-card" style="margin-top: 40px; text-align: center;">
-                <h3 style="font-family: 'Playfair Display', serif; color: #e91e63; margin-bottom: 20px;">
-                    <i class="fas fa-star" style="color: gold; margin-right: 10px;"></i>
-                    তোমার জন্য আমার প্রতিজ্ঞা
-                    <i class="fas fa-star" style="color: gold; margin-left: 10px;"></i>
-                </h3>
-                <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 20px;">
-                    <div class="promise-card" style="background: rgba(255, 255, 255, 0.7); padding: 15px; border-radius: 15px; width: 150px;">
-                        <i class="fas fa-hand-holding-heart" style="font-size: 2rem; color: #e91e63;"></i>
-                        <p>সবসময় ভালোবাসা</p>
-                    </div>
-                    <div class="promise-card" style="background: rgba(255, 255, 255, 0.7); padding: 15px; border-radius: 15px; width: 150px;">
-                        <i class="fas fa-shield-alt" style="font-size: 2rem; color: #4caf50;"></i>
-                        <p>সুরক্ষা ও সহযোগিতা</p>
-                    </div>
-                    <div class="promise-card" style="background: rgba(255, 255, 255, 0.7); padding: 15px; border-radius: 15px; width: 150px;">
-                        <i class="fas fa-laugh-beam" style="font-size: 2rem; color: #ff9800;"></i>
-                        <p>অনন্ত হাসি ও আনন্দ</p>
-                    </div>
-                </div>
+                <div class="signature">- চিরকাল তোমার, ওয়ালিদ</div>
             </div>
         </div>
 
@@ -662,28 +817,48 @@
 
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
     <script>
-        // 1. Enhanced Floating Hearts
-        function createHearts() {
-            const container = document.getElementById('hearts-container');
-            const heartCount = 30;
+        // 1. Enhanced Floating Elements
+        function createFloatingElements() {
+            const container = document.getElementById('floating-elements');
             
-            for (let i = 0; i < heartCount; i++) {
+            // Create hearts
+            for (let i = 0; i < 20; i++) {
                 const heart = document.createElement('div');
-                heart.classList.add('heart');
+                heart.classList.add('floating-heart');
                 
                 const randomX = Math.random() * 100;
                 heart.style.left = randomX + "vw";
                 heart.style.setProperty('--move-x', (Math.random() * 200 - 100) + "px");
                 heart.style.animationDuration = Math.random() * 5 + 8 + "s";
                 heart.style.animationDelay = Math.random() * 5 + "s";
-                heart.style.width = Math.random() * 10 + 15 + "px";
+                heart.style.width = Math.random() * 8 + 12 + "px";
                 heart.style.height = heart.style.width;
+                
+                // Random heart colors
+                const colors = ['#e91e63', '#ff4081', '#ff85a2', '#f48fb1'];
+                heart.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
                 
                 container.appendChild(heart);
             }
+            
+            // Create stars
+            for (let i = 0; i < 15; i++) {
+                const star = document.createElement('div');
+                star.classList.add('floating-star');
+                star.innerHTML = '★';
+                
+                const randomX = Math.random() * 100;
+                star.style.left = randomX + "vw";
+                star.style.setProperty('--move-x', (Math.random() * 200 - 100) + "px");
+                star.style.animationDuration = Math.random() * 5 + 15 + "s";
+                star.style.animationDelay = Math.random() * 5 + "s";
+                star.style.fontSize = Math.random() * 0.8 + 0.8 + "rem";
+                
+                container.appendChild(star);
+            }
         }
 
-        createHearts();
+        createFloatingElements();
 
         // 2. Sparkle Effect on Click
         document.addEventListener('click', function(e) {
@@ -695,8 +870,12 @@
             sparkle.classList.add('sparkle');
             sparkle.style.left = x + 'px';
             sparkle.style.top = y + 'px';
-            sparkle.style.width = Math.random() * 15 + 5 + 'px';
+            sparkle.style.width = Math.random() * 12 + 3 + 'px';
             sparkle.style.height = sparkle.style.width;
+            
+            // Random sparkle color
+            const colors = ['white', '#ffeb3b', '#4fc3f7', '#e91e63'];
+            sparkle.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
             
             document.body.appendChild(sparkle);
             
@@ -705,19 +884,75 @@
             }, 1500);
         }
 
-        // 3. Celebration Logic
-        function startCelebration() {
-            const welcome = document.getElementById('welcome-screen');
-            const main = document.getElementById('main-content');
-            const musicBtn = document.getElementById('music-btn');
-            const scrollIndicator = document.getElementById('scroll-indicator');
+        // 3. Countdown Timer Logic
+        let countdownInterval;
+        
+        function startCountdown() {
+            // Hide welcome screen and show countdown
+            document.getElementById('welcome-screen').style.display = 'none';
+            document.getElementById('countdown-container').style.display = 'flex';
             
-            // Fade out welcome screen
-            welcome.style.opacity = '0';
-            welcome.style.transform = 'translateY(-30px)';
+            // Set target time to next midnight (12:00 AM)
+            const now = new Date();
+            const target = new Date();
+            target.setHours(24, 0, 0, 0); // Next midnight
             
+            // For testing: set to 10 seconds from now
+            // const target = new Date(now.getTime() + 10000);
+            
+            updateCountdown(target);
+            
+            countdownInterval = setInterval(() => {
+                updateCountdown(target);
+            }, 1000);
+            
+            // Start background music
+            playMusic();
+        }
+        
+        function updateCountdown(target) {
+            const now = new Date();
+            const diff = target - now;
+            
+            if (diff <= 0) {
+                // Countdown finished
+                clearInterval(countdownInterval);
+                showSurprise();
+                return;
+            }
+            
+            // Calculate hours, minutes, seconds
+            const hours = Math.floor(diff / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+            
+            // Update display
+            document.getElementById('countdown-hours').textContent = hours.toString().padStart(2, '0');
+            document.getElementById('countdown-minutes').textContent = minutes.toString().padStart(2, '0');
+            document.getElementById('countdown-seconds').textContent = seconds.toString().padStart(2, '0');
+            
+            // Add animation when less than 10 seconds
+            if (seconds < 10 && minutes === 0 && hours === 0) {
+                document.getElementById('countdown-seconds').style.animation = 'pulse 0.5s infinite';
+            }
+        }
+        
+        function showSurprise() {
+            // Hide countdown
+            document.getElementById('countdown-container').style.display = 'none';
+            
+            // Show final celebration animation
+            const celebration = document.getElementById('final-celebration');
+            celebration.style.display = 'flex';
+            
+            // Fire massive confetti
+            fireMassiveConfetti();
+            
+            // After 5 seconds, show main content
             setTimeout(() => {
-                welcome.style.display = 'none';
+                celebration.style.display = 'none';
+                
+                const main = document.getElementById('main-content');
                 main.style.display = 'block';
                 
                 // Fade in main content
@@ -726,27 +961,24 @@
                     main.style.transform = 'translateY(0)';
                 }, 50);
                 
-                musicBtn.style.display = 'flex';
-                scrollIndicator.style.display = 'none';
-                playMusic();
-                startSlideshow();
-                fireConfettiBurst();
+                // Show music button
+                document.getElementById('music-btn').style.display = 'flex';
                 
-                // Scroll to main content
-                window.scrollTo({
-                    top: 0,
-                    behavior: 'smooth'
-                });
-            }, 500);
+                // Start slideshow
+                startSlideshow();
+                
+                // Fire regular confetti
+                fireConfettiBurst();
+            }, 5000);
         }
-
+        
         // 4. Music Control
         const audio = document.getElementById('bg-music');
         const btn = document.getElementById('music-btn');
         let isPlaying = false;
 
         function playMusic() {
-            audio.volume = 0.5;
+            audio.volume = 0.4;
             audio.play().then(() => {
                 isPlaying = true;
                 btn.classList.remove('paused');
@@ -774,11 +1006,11 @@
         const slides = document.querySelectorAll('.slide');
         const captions = [
             "তোমার চোখে চোখ রেখে ❤️",
-            "সবচেয়ে সুন্দর তুমি ✨",
+            "সবচেয়ে সুন্দর তুমি ✨",
             "আমাদের মিষ্টি স্মৃতি 📸",
             "সারাজীবন পাশে থেকো 🤝",
             "মুগ্ধতা... 📖",
-            "ভালোবাসি তোমায় 💖"
+            "ভালোবাসি তোমায় 💖"
         ];
         const captionText = document.getElementById('photo-caption');
         let currentSlide = 0;
@@ -798,46 +1030,48 @@
             }, 4000);
         }
 
-        // 6. Enhanced Confetti
-        function fireConfettiBurst() {
-            // Multiple bursts
-            for(let i = 0; i < 5; i++) {
+        // 6. Confetti Functions
+        function fireMassiveConfetti() {
+            // Multiple large bursts
+            for(let i = 0; i < 8; i++) {
                 setTimeout(() => {
                     confetti({
-                        particleCount: 150,
-                        spread: 100,
+                        particleCount: 300,
+                        spread: 150,
                         origin: { y: 0.6 },
-                        colors: ['#e91e63', '#ff4081', '#ffd700', '#4caf50', '#2196f3']
+                        colors: ['#e91e63', '#ff4081', '#ffd700', '#4caf50', '#2196f3', '#9c27b0'],
+                        shapes: ['circle', 'square', 'star'],
+                        scalar: 1.2
                     });
-                }, i * 300);
+                }, i * 400);
             }
-            
+        }
+        
+        function fireConfettiBurst() {
             // Continuous subtle confetti
-            setTimeout(() => {
-                const duration = 10 * 1000;
-                const end = Date.now() + duration;
+            const duration = 15 * 1000;
+            const end = Date.now() + duration;
+            
+            (function frame() {
+                confetti({
+                    particleCount: 4,
+                    angle: 60,
+                    spread: 55,
+                    origin: { x: 0 },
+                    colors: ['#e91e63', '#ff4081', '#ffd700']
+                });
+                confetti({
+                    particleCount: 4,
+                    angle: 120,
+                    spread: 55,
+                    origin: { x: 1 },
+                    colors: ['#e91e63', '#ff4081', '#ffd700']
+                });
                 
-                (function frame() {
-                    confetti({
-                        particleCount: 3,
-                        angle: 60,
-                        spread: 55,
-                        origin: { x: 0 },
-                        colors: ['#e91e63', '#ff4081', '#ffd700']
-                    });
-                    confetti({
-                        particleCount: 3,
-                        angle: 120,
-                        spread: 55,
-                        origin: { x: 1 },
-                        colors: ['#e91e63', '#ff4081', '#ffd700']
-                    });
-                    
-                    if (Date.now() < end) {
-                        requestAnimationFrame(frame);
-                    }
-                }());
-            }, 2000);
+                if (Date.now() < end) {
+                    requestAnimationFrame(frame);
+                }
+            }());
         }
 
         // 7. Progress Bar
@@ -849,7 +1083,7 @@
         });
 
         // 8. Initial Sparkles
-        for(let i = 0; i < 20; i++) {
+        for(let i = 0; i < 15; i++) {
             setTimeout(() => {
                 createSparkle(
                     Math.random() * window.innerWidth,
@@ -857,15 +1091,11 @@
                 );
             }, i * 100);
         }
-
-        // 9. Auto-scroll hint
-        let scrollHintShown = false;
-        window.addEventListener('scroll', () => {
-            if(!scrollHintShown && window.scrollY > 100) {
-                document.getElementById('scroll-indicator').style.opacity = '0';
-                scrollHintShown = true;
-            }
-        });
+        
+        // 9. Add some initial floating elements with delay
+        setTimeout(() => {
+            createFloatingElements();
+        }, 3000);
     </script>
 </body>
 </html>
