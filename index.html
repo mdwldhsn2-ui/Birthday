@@ -108,7 +108,7 @@
             50% { opacity: 1; transform: scale(1); }
         }
 
-        /* --- Countdown Timer --- */
+        /* --- 10 Second Countdown Timer --- */
         .countdown-container {
             display: none;
             position: fixed;
@@ -116,7 +116,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.85);
+            background: rgba(0, 0, 0, 0.9);
             z-index: 1000;
             flex-direction: column;
             justify-content: center;
@@ -127,7 +127,7 @@
         .countdown-title {
             font-family: 'Dancing Script', cursive;
             font-size: 3.5rem;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
             color: var(--gold);
             text-shadow: 0 0 20px rgba(255, 215, 0, 0.7);
             text-align: center;
@@ -137,48 +137,62 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            flex-wrap: wrap;
-            gap: 20px;
-            margin: 30px 0;
+            gap: 15px;
+            margin: 20px 0;
         }
 
         .clock-unit {
             display: flex;
             flex-direction: column;
             align-items: center;
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.15);
             backdrop-filter: blur(10px);
             border-radius: 15px;
             padding: 20px 15px;
             min-width: 100px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3),
+                        inset 0 0 15px rgba(255, 215, 0, 0.3);
+            transition: all 0.3s;
+        }
+
+        .clock-unit.active {
+            transform: scale(1.1);
+            box-shadow: 0 0 30px rgba(255, 64, 129, 0.8),
+                        inset 0 0 20px rgba(255, 215, 0, 0.5);
         }
 
         .clock-number {
-            font-size: 3.5rem;
+            font-size: 4rem;
             font-weight: bold;
             color: white;
             font-family: 'Poppins', sans-serif;
-            text-shadow: 0 0 15px var(--gold);
+            text-shadow: 0 0 20px var(--gold);
+            transition: all 0.3s;
         }
 
         .clock-label {
             font-size: 1rem;
-            color: rgba(255, 255, 255, 0.8);
+            color: rgba(255, 255, 255, 0.9);
             margin-top: 5px;
             text-transform: uppercase;
             letter-spacing: 1px;
         }
 
         .countdown-message {
-            font-size: 1.3rem;
-            margin-top: 30px;
+            font-size: 1.5rem;
+            margin-top: 20px;
             color: var(--pink-light);
             text-align: center;
             max-width: 600px;
             padding: 0 20px;
             font-family: 'Playfair Display', serif;
+            animation: pulseMessage 2s infinite alternate;
+        }
+
+        @keyframes pulseMessage {
+            0% { opacity: 0.8; }
+            100% { opacity: 1; text-shadow: 0 0 10px rgba(255, 64, 129, 0.8); }
         }
 
         /* --- UI Layout --- */
@@ -634,8 +648,9 @@
             .letter-card { padding: 25px; }
             .letter-card h2 { font-size: 1.9rem; }
             .clock-unit { min-width: 80px; padding: 15px 10px; }
-            .clock-number { font-size: 2.8rem; }
+            .clock-number { font-size: 3rem; }
             .countdown-title { font-size: 2.8rem; }
+            .clock-container { gap: 10px; }
         }
 
         /* Final Celebration Animation */
@@ -681,6 +696,24 @@
             padding: 0 20px;
             font-family: 'Playfair Display', serif;
         }
+        
+        /* Auto-start button */
+        .auto-start-btn {
+            margin-top: 20px;
+            padding: 10px 25px;
+            font-size: 1rem;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .auto-start-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.05);
+        }
     </style>
 </head>
 <body>
@@ -690,29 +723,25 @@
         আপনার ব্রাউজার অডিও সমর্থন করে না।
     </audio>
 
-    <!-- Countdown Timer -->
+    <!-- 10 Second Countdown Timer -->
     <div class="countdown-container" id="countdown-container">
-        <h1 class="countdown-title">প্রিয় বউ</h1>
+        <h1 class="countdown-title">প্রিয় কেয়া</h1>
         <div class="clock-container">
             <div class="clock-unit">
-                <div class="clock-number" id="countdown-hours">00</div>
-                <div class="clock-label">ঘন্টা</div>
-            </div>
-            <div class="clock-unit">
-                <div class="clock-number" id="countdown-minutes">02</div>
-                <div class="clock-label">মিনিট</div>
-            </div>
-            <div class="clock-unit">
-                <div class="clock-number" id="countdown-seconds">00</div>
+                <div class="clock-number" id="countdown-seconds">10</div>
                 <div class="clock-label">সেকেন্ড</div>
             </div>
         </div>
-        <p class="countdown-message">তোমার বিশেষ দিনের জন্য অপেক্ষা করছি... যখন ঘড়ির কাঁটা ঠিক ১২টায় মিলিত হবে, তখনই খুলে যাবে তোমার বিশেষ উপহার!</p>
+        <p class="countdown-message">তোমার বিশেষ উপহারের জন্য প্রস্তুত হও! মাত্র কয়েক সেকেন্ড...</p>
+        <button class="auto-start-btn" id="skip-countdown" style="display:none;" onclick="skipCountdown()">
+            <i class="fas fa-forward" style="margin-right: 8px;"></i>
+            এখনই ওপেন করুন
+        </button>
     </div>
 
     <!-- Final Celebration -->
     <div class="final-celebration" id="final-celebration">
-        <div class="celebration-text">শুভ জন্মদিন,, আমার কলিজা! 🎉</div>
+        <div class="celebration-text">শুভ জন্মদিন প্রিয় কেয়া! 🎉</div>
         <div class="celebration-subtext">জীবনের প্রতিটি মুহূর্ত যেন তোমার জন্য হয়ে উঠে সুন্দর ও রোমান্টিক। আজকের এই বিশেষ দিনে তোমাকে অগণিত শুভেচ্ছা ও ভালোবাসা। ❤️</div>
     </div>
 
@@ -762,6 +791,11 @@
                 <i class="fas fa-gift" style="margin-right: 10px;"></i>
                 তোমার উপহার খুলে দেখো
             </button>
+            
+            <div style="margin-top: 20px; font-size: 0.9rem; color: #666;">
+                <i class="fas fa-info-circle" style="margin-right: 5px;"></i>
+                গিফট খুলতে ১০ সেকেন্ড অপেক্ষা করুন
+            </div>
         </div>
 
         <!-- Main Content (Hidden Initially) -->
@@ -803,13 +837,13 @@
             <div class="letter-card">
                 <h2>তোমার জন্য আমার হৃদয়ের কথাগুলো...</h2>
                 <div class="letter-text">
-                    প্রিয়তমা,<br><br>
+                    প্রিয়তমা কেয়া,<br><br>
                     আজ তোমার জন্মদিন। এই বিশেষ দিনে আমার হৃদয় থেকে কিছু কথা জানাই। তুমি আমার জীবনে এসে সবকিছুকে অর্থপূর্ণ করে তুলেছ। তোমার প্রতিটি হাসি, প্রতিটি কথা আমার কাছে অমূল্য সম্পদ।<br><br>
                     মনে আছে, আমাদের প্রথম দেখা? সেদিন থেকেই জেনেছিলাম, তুমি সাধারণ কেউ নও। তুমি আমার জীবনের শ্রেষ্ঠ উপহার। প্রতিটি দিন যেন তোমার সাথে কাটাতে পারি, এই আমার একমাত্র কামনা।<br><br>
                     তোমার স্বপ্নগুলো সত্যি হোক, জীবনের প্রতিটি পদক্ষেপে সাফল্য যেন তোমার সঙ্গী হয়। আমি সবসময় তোমার পাশে আছি এবং থাকবো।<br><br>
                     আজকের দিনটি যেন তোমার জন্য হয়ে উঠে অবিস্মরণীয়। জন্মদিনের অনেক অনেক শুভেচ্ছা, আমার প্রিয়তমা।
                 </div>
-                <div class="signature">-তোমার জান, ওয়ালিদ</div>
+                <div class="signature">- চিরকাল তোমার, ওয়ালিদ</div>
             </div>
         </div>
 
@@ -817,6 +851,14 @@
 
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
     <script>
+        // Page load event - start countdown automatically when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            // Show countdown after 1 second delay
+            setTimeout(function() {
+                startAutoCountdown();
+            }, 1000);
+        });
+        
         // 1. Enhanced Floating Elements
         function createFloatingElements() {
             const container = document.getElementById('floating-elements');
@@ -884,57 +926,78 @@
             }, 1500);
         }
 
-        // 3. Countdown Timer Logic
+        // 3. Auto-start Countdown Timer Logic
         let countdownInterval;
+        let secondsLeft = 10;
+        let countdownStarted = false;
         
-        function startCountdown() {
+        function startAutoCountdown() {
+            if (countdownStarted) return;
+            countdownStarted = true;
+            
             // Hide welcome screen and show countdown
             document.getElementById('welcome-screen').style.display = 'none';
             document.getElementById('countdown-container').style.display = 'flex';
             
-            // Set target time to next midnight (12:00 AM)
-            const now = new Date();
-            const target = new Date();
-            target.setHours(24, 9, 45, 0); // Next midnight
+            // Show skip button after 3 seconds
+            setTimeout(() => {
+                document.getElementById('skip-countdown').style.display = 'block';
+            }, 3000);
             
-            // For testing: set to 10 seconds from now
-            // const target = new Date(now.getTime() + 10000);
-            
-            updateCountdown(target);
+            // Start countdown from 10 seconds
+            updateCountdown();
             
             countdownInterval = setInterval(() => {
-                updateCountdown(target);
+                updateCountdown();
             }, 1000);
             
             // Start background music
             playMusic();
         }
         
-        function updateCountdown(target) {
-            const now = new Date();
-            const diff = target - now;
+        function startCountdown() {
+            // Manual start if auto-start didn't work
+            if (!countdownStarted) {
+                startAutoCountdown();
+            }
+        }
+        
+        function updateCountdown() {
+            const secondsElement = document.getElementById('countdown-seconds');
+            const clockUnit = document.querySelector('.clock-unit');
             
-            if (diff <= 0) {
+            // Update display
+            secondsElement.textContent = secondsLeft.toString().padStart(2, '0');
+            
+            // Add pulse animation for last 3 seconds
+            if (secondsLeft <= 3) {
+                clockUnit.classList.add('active');
+                secondsElement.style.color = '#ffeb3b';
+                secondsElement.style.textShadow = '0 0 25px #ff4081, 0 0 40px #ffeb3b';
+                
+                // Add heartbeat effect
+                secondsElement.style.animation = 'heartbeat 0.5s infinite alternate';
+            } else {
+                clockUnit.classList.remove('active');
+                secondsElement.style.color = 'white';
+                secondsElement.style.textShadow = '0 0 20px var(--gold)';
+                secondsElement.style.animation = '';
+            }
+            
+            if (secondsLeft <= 0) {
                 // Countdown finished
                 clearInterval(countdownInterval);
                 showSurprise();
                 return;
             }
             
-            // Calculate hours, minutes, seconds
-            const hours = Math.floor(diff / (1000 * 60 * 60));
-            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-            
-            // Update display
-            document.getElementById('countdown-hours').textContent = hours.toString().padStart(2, '0');
-            document.getElementById('countdown-minutes').textContent = minutes.toString().padStart(2, '0');
-            document.getElementById('countdown-seconds').textContent = seconds.toString().padStart(2, '0');
-            
-            // Add animation when less than 10 seconds
-            if (seconds < 10 && minutes === 0 && hours === 0) {
-                document.getElementById('countdown-seconds').style.animation = 'pulse 0.5s infinite';
-            }
+            secondsLeft--;
+        }
+        
+        function skipCountdown() {
+            clearInterval(countdownInterval);
+            secondsLeft = 0;
+            showSurprise();
         }
         
         function showSurprise() {
@@ -948,7 +1011,7 @@
             // Fire massive confetti
             fireMassiveConfetti();
             
-            // After 5 seconds, show main content
+            // After 3 seconds, show main content
             setTimeout(() => {
                 celebration.style.display = 'none';
                 
@@ -969,7 +1032,7 @@
                 
                 // Fire regular confetti
                 fireConfettiBurst();
-            }, 5000);
+            }, 3000);
         }
         
         // 4. Music Control
@@ -1096,6 +1159,16 @@
         setTimeout(() => {
             createFloatingElements();
         }, 3000);
+        
+        // Add CSS for heartbeat animation
+        const style = document.createElement('style');
+        style.innerHTML = `
+            @keyframes heartbeat {
+                0% { transform: scale(1); }
+                100% { transform: scale(1.2); }
+            }
+        `;
+        document.head.appendChild(style);
     </script>
 </body>
-</html>
+    </html>
